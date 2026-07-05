@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Alien Grover · ксено-тамагочи</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+<div class="phone">
+
+<!-- ===== HUD ===== -->
+<header class="hud">
+  <div class="hud__stats">
+    <div class="stat stat--money" id="hudMoney"><span class="stat__icon">💠</span><span class="stat__value">50</span></div>
+    <div class="stat stat--xp" id="hudXp"><span class="stat__icon">✦</span><span class="stat__value">0</span></div>
+    <div class="stat stat--level" id="hudLevel"><span class="stat__caption">UR.</span><span class="stat__value">1</span></div>
+    <div class="stat stat--user" id="hudUser" aria-hidden="true"><span class="stat__icon">👽</span><span class="stat__value">Пилот</span></div>
+  </div>
+  <div class="hud__actions">
+    <button class="btn-icon" id="btnStats" type="button" title="Статистика">📊</button>
+    <button class="btn-icon" id="btnShop" type="button" title="Магазин">🛒</button>
+    <button class="btn-icon" id="btnMute" type="button" title="Звук">🔊</button>
+    <button class="btn-icon" id="btnReset" type="button" title="Сброс">↺</button>
+  </div>
+</header>
+
+<!-- ===== Event banner ===== -->
+<div class="event" id="eventBanner" aria-hidden="true">
+  <span class="event__icon">🐛</span>
+  <span class="event__text">Космо-клещ!</span>
+  <button class="event__action" id="eventAction" type="button">Обработать</button>
+</div>
+
+<!-- ===== MAIN ===== -->
+<main class="stage">
+
+  <!-- Био-камеры: горизонтальный ряд -->
+  <aside class="pots">
+    <ul class="pots__list" id="potsList"></ul>
+  </aside>
+
+  <!-- Вид / streak -->
+  <div class="strain-info">
+    <span class="strain-info__name" id="strainName">—</span>
+    <span class="strain-info__badge" id="strainBadge">—</span>
+    <span class="streak" id="streakBadge" aria-hidden="true">🔥 x0</span>
+  </div>
+
+  <!-- HP-бар босса -->
+  <div class="growth-progress">
+    <div class="growth-progress__bar">
+      <span class="growth-progress__fill" style="--w:0%"></span>
+      <div class="growth-progress__ticks">
+        <span style="left:25%"></span>
+        <span style="left:50%"></span>
+        <span style="left:75%"></span>
+      </div>
+    </div>
+    <div class="growth-progress__meta">
+      <span class="growth-progress__label">РОСТ КУЛЬТУРЫ</span>
+      <span id="growthPct">0%</span>
+      <span id="growthEta">—</span>
+    </div>
+  </div>
+
+  <!-- Арена с боссом — интерьер био-камеры выращивания (инопланетный стенд) -->
+  <div class="growbox" id="growbox">
+
+    <!-- Фон: стены из майларовой плёнки -->
+    <div class="gb__mylar"></div>
+
+    <!-- Воздуховоды (цилиндры в верхних углах) -->
+    <div class="gb__duct gb__duct--l"></div>
+    <div class="gb__duct gb__duct--r"></div>
+
+    <!-- Вентилятор на стене -->
+    <div class="gb__fan"><span class="gb__fan-blades"></span></div>
+
+    <!-- Полки с бутылками удобрений -->
+    <div class="gb__shelf gb__shelf--l"><span class="gb__bottle gb__bottle--a">🧴</span><span class="gb__bottle gb__bottle--b">🧪</span></div>
+    <div class="gb__shelf gb__shelf--r"><span class="gb__bottle gb__bottle--a">🧪</span><span class="gb__bottle gb__bottle--b">🧴</span></div>
+
+    <!-- Тонирующий оверлей (rgba-тинт от JS) -->
+    <div class="sky" id="sky"></div>
+
+    <!-- LED-фитолампа -->
+    <div class="lamp" id="lamp" data-state="off"><span class="lamp__tube"></span><span class="lamp__glow"></span></div>
+
+    <!-- Решётчатый пол с лотком -->
+    <div class="gb__floor"><span class="gb__tray"></span></div>
+
+    <div class="speech" id="speech" aria-hidden="true">🧬</div>
+    <div class="mood" id="mood">🙂</div>
+
+    <div class="plant plant--s0 plant--happy" id="plant">
+      <div class="plant__leaves">
+        <svg class="plant__svg" viewBox="-100 -160 200 200" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+          <defs>
+            <linearGradient id="leafGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#5fffa8"/>
+              <stop offset="0.5" stop-color="#43e36b"/>
+              <stop offset="1" stop-color="#1f9d44"/>
+            </linearGradient>
+            <path id="leaf" d="M0 0 L -2 -15 L -4 -18 L -3 -30 L -5 -33 L -3 -45 L -5 -48 L -3 -60 L -5 -63 L -3 -75 L -4 -78 L -2 -90 L -3 -120 L 0 -148 L 3 -120 L 2 -90 L 4 -78 L 3 -75 L 5 -63 L 3 -60 L 5 -48 L 3 -45 L 5 -33 L 3 -30 L 4 -18 L 2 -15 Z"
+                  fill="url(#leafGrad)" stroke="rgba(168,85,247,.55)" stroke-width="0.6" stroke-linejoin="round"/>
+          </defs>
+          <g class="leaves">
+            <use href="#leaf" transform="rotate(-60) scale(0.7)"/>
+            <use href="#leaf" transform="rotate(-40) scale(0.82)"/>
+            <use href="#leaf" transform="rotate(-20) scale(0.92)"/>
+            <use href="#leaf" transform="rotate(0)"/>
+            <use href="#leaf" transform="rotate(20) scale(0.92)"/>
+            <use href="#leaf" transform="rotate(40) scale(0.82)"/>
+            <use href="#leaf" transform="rotate(60) scale(0.7)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="plant__stem"></div>
+    </div>
+    <div class="pot-dish"></div>
+
+    <div class="fx" id="fx"></div>
+    <div class="dmg-layer" id="dmgLayer" aria-hidden="true"></div>
+  </div>
+
+  <!-- Кнопки действий -->
+  <div class="grow-actions">
+    <button class="btn btn--water" id="btnWater" type="button"><span class="btn__icon">💧</span><span class="btn__label">Залить</span></button>
+    <button class="btn btn--feed" id="btnFeed" type="button"><span class="btn__icon">🧪</span><span class="btn__label">Подкорм</span></button>
+    <button class="btn btn--light btn--lamp" id="btnLight" type="button"><span class="btn__icon">💡</span><span class="btn__label">Лампа</span></button>
+    <button class="btn btn--harvest" id="btnHarvest" type="button"><span class="btn__icon">🧬</span><span class="btn__label">Извлечь</span></button>
+  </div>
+
+  <!-- Шкалы -->
+  <aside class="panel">
+    <h2 class="panel__title">Состояние культуры</h2>
+    <div class="meters" id="meters">
+      <div class="meter" data-meter="growth">
+        <div class="meter__head"><span class="meter__name">Рост</span><span class="meter__urgency" aria-hidden="true">!</span><span class="meter__value">0%</span></div>
+        <div class="meter__bar"><span class="meter__fill" style="--w:0%"></span></div>
+      </div>
+      <div class="meter" data-meter="water">
+        <div class="meter__head"><span class="meter__name">Плазма</span><span class="meter__urgency" aria-hidden="true">!</span><span class="meter__value">60%</span></div>
+        <div class="meter__bar"><span class="meter__fill" style="--w:60%"></span></div>
+      </div>
+      <div class="meter" data-meter="food">
+        <div class="meter__head"><span class="meter__name">Катализатор</span><span class="meter__urgency" aria-hidden="true">!</span><span class="meter__value">60%</span></div>
+        <div class="meter__bar"><span class="meter__fill" style="--w:60%"></span></div>
+      </div>
+      <div class="meter" data-meter="light">
+        <div class="meter__head"><span class="meter__name">Свет</span><span class="meter__urgency" aria-hidden="true">!</span><span class="meter__value">50%</span></div>
+        <div class="meter__bar"><span class="meter__fill" style="--w:50%"></span></div>
+      </div>
+      <div class="meter meter--health" data-meter="health">
+        <div class="meter__head"><span class="meter__name">HP</span><span class="meter__value">100%</span></div>
+        <div class="meter__bar"><span class="meter__fill" style="--w:100%"></span></div>
+      </div>
+    </div>
+  </aside>
+
+  <p class="hint" id="actionHint">Держи шкалы в зелёной зоне · 40–80% · космический баланс</p>
+</main>
+
+</div><!-- /.phone -->
+
+<!-- ===== Intro ===== -->
+<div class="modal modal--intro" id="intro" aria-hidden="false">
+  <div class="modal__backdrop"></div>
+  <div class="intro__card" style="position:relative;z-index:1;">
+    <div class="intro__emoji">🧬</div>
+    <h3>ДОБРО ПОЖАЛОВАТЬ, ИССЛЕДОВАТЕЛЬ!</h3>
+    <p>Перед тобой живой ксено-организм. Он растёт, голодает, жаждет плазмы и боится темноты — прямо как тамагочи из другой галактики.</p>
+    <ul class="intro__list">
+      <li><b>💠 ЗАЛИВАЙ ПЛАЗМУ</b> — не давай ей упасть ниже 40%.</li>
+      <li><b>🧪 ПОДКОРМ КАТАЛИЗАТОРОМ</b> — он тоже кончается.</li>
+      <li><b>💡 ВКЛЮЧАЙ СВЕТ</b> — культура растёт только «днём».</li>
+      <li><b>🧬 ИЗВЛЕКИ СПОРЫ</b>, когда рост дойдёт до 100%.</li>
+    </ul>
+    <p class="intro__warn">⚠️ Не следишь → культура заболевает и <b>ГИБНЕТ</b>. Будь внимателен.</p>
+    <button class="btn btn--harvest intro__cta" id="btnIntro" type="button">ПОНЯТНО, ПОЕХАЛИ!</button>
+  </div>
+</div>
+
+<!-- ===== Shop ===== -->
+<div class="modal" id="shopModal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__card">
+    <header class="modal__head"><h3>🛒 ЛАБОРАТОРИЯ</h3><button class="modal__close" data-close type="button">✕</button></header>
+    <div class="shop" id="shopBody"></div>
+  </div>
+</div>
+
+<!-- ===== Stats ===== -->
+<div class="modal" id="statsModal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__card">
+    <header class="modal__head"><h3>📊 БОРТ-ЖУРНАЛ</h3><button class="modal__close" data-close type="button">✕</button></header>
+    <div id="statsBody"></div>
+  </div>
+</div>
+
+<!-- ===== Harvest ===== -->
+<div class="modal" id="harvestModal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__card modal__card--harvest">
+    <div class="harvest__emoji">🧬</div>
+    <h3>СПОРЫ ИЗВЛЕЧЕНЫ!</h3>
+    <p class="harvest__strain" id="harvestStrain">—</p>
+    <div class="harvest__rewards">
+      <div class="harvest__reward" id="harvestReward">+$0</div>
+      <div class="harvest__reward" id="harvestXp">+0 XP</div>
+    </div>
+    <div class="harvest__badge" id="harvestPerfect">💯 ИДЕАЛЬНАЯ ЭКСТРАКЦИЯ!</div>
+    <div class="harvest__badge harvest__badge--level" id="harvestLevelUp">⭐ LEVEL UP!</div>
+    <p class="harvest__hint">Камера свободна. Что дальше?</p>
+    <div class="harvest__actions">
+      <button class="btn btn--feed" id="btnHarvestReplant" type="button">🧬 Запустить ту же</button>
+      <button class="btn btn--harvest" id="btnHarvestShop" type="button">🛒 В лабораторию</button>
+      <button class="btn btn--ghost" data-close type="button">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Toasts ===== -->
+<div class="toasts" id="toasts"></div>
+
+<script src="game.js" defer></script>
+</body>
+</html>
