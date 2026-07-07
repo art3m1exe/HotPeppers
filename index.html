@@ -97,9 +97,9 @@
 
     <div class="plant plant--s0 plant--happy" id="plant">
       <div class="plant__leaves">
-        <svg class="plant__svg" viewBox="-110 -175 220 215" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+        <svg class="plant__svg" viewBox="-95 -190 190 205" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
           <defs>
-            <radialGradient id="auraFire" cx="0.5" cy="0.55" r="0.55">
+            <radialGradient id="auraFire" cx="0.5" cy="0.5" r="0.55">
               <stop offset="0" stop-color="#ffd84a" stop-opacity="0.6"/>
               <stop offset="0.3" stop-color="#ff9e1a" stop-opacity="0.4"/>
               <stop offset="0.65" stop-color="#ff3b30" stop-opacity="0.16"/>
@@ -140,47 +140,86 @@
               <stop offset="0.5" stop-color="#2d8a3f"/>
               <stop offset="1" stop-color="#1a5e26"/>
             </linearGradient>
+            <linearGradient id="trunkGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#1a4d24"/>
+              <stop offset="0.45" stop-color="#3a8c3a"/>
+              <stop offset="0.7" stop-color="#2d6b30"/>
+              <stop offset="1" stop-color="#143820"/>
+            </linearGradient>
+            <linearGradient id="trunkShade" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#000" stop-opacity="0"/>
+              <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+              <stop offset="0.85" stop-color="#0a1a08" stop-opacity="0.45"/>
+              <stop offset="1" stop-color="#000" stop-opacity="0.62"/>
+            </linearGradient>
             <filter id="auraBlur" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="7"/>
             </filter>
           </defs>
           <g class="aura">
-            <ellipse class="aura-fire" cx="0" cy="-72" rx="92" ry="108" fill="url(#auraFire)" filter="url(#auraBlur)"/>
-            <ellipse class="aura-core" cx="0" cy="-72" rx="54" ry="82" fill="url(#pepperGlow)"/>
+            <ellipse class="aura-fire" cx="0" cy="-85" rx="82" ry="108" fill="url(#auraFire)" filter="url(#auraBlur)"/>
+            <ellipse class="aura-core" cx="0" cy="-85" rx="50" ry="80" fill="url(#pepperGlow)"/>
           </g>
-          <ellipse class="pepper-shadow" cx="0" cy="3" rx="24" ry="6" fill="#000" opacity="0.5" filter="url(#auraBlur)"/>
+          <ellipse class="pepper-shadow" cx="0" cy="3" rx="28" ry="6" fill="#000" opacity="0.5" filter="url(#auraBlur)"/>
           <g class="leaves">
-            <ellipse class="pepper-pulse" cx="0" cy="-76" rx="38" ry="84" fill="url(#pepperGlow)"/>
-            <path class="pepper-body"
-                  d="M0 2 C-17 -8,-27 -42,-25 -82 C-23 -122,-12 -154,2 -162 Q10 -168,17 -158 Q19 -148,14 -138 C16 -112,21 -78,19 -42 C19 -18,9 -2,0 2 Z"
-                  fill="url(#pepperBody)" stroke="rgba(120,10,5,.55)" stroke-width="0.8" stroke-linejoin="round"/>
-            <path class="pepper-shade"
-                  d="M0 2 C-17 -8,-27 -42,-25 -82 C-23 -122,-12 -154,2 -162 Q10 -168,17 -158 Q19 -148,14 -138 C16 -112,21 -78,19 -42 C19 -18,9 -2,0 2 Z"
-                  fill="url(#pepperShade)"/>
-            <path class="pepper-vein"
-                  d="M4 -2 C-9 -42,-13 -92,-7 -150"
-                  stroke="rgba(70,12,6,.52)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-            <path class="pepper-vein-s"
-                  d="M-2 -42 C-8 -46,-14 -44,-18 -38 M-2 -74 C-9 -78,-15 -76,-19 -68 M-2 -106 C-8 -110,-13 -108,-16 -102"
-                  stroke="rgba(70,12,6,.32)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
-            <ellipse class="pepper-spec" cx="-8" cy="-96" rx="8" ry="36" fill="url(#pepperSpec)" transform="rotate(-9 -8 -96)"/>
-            <ellipse class="pepper-spec-sm" cx="-6" cy="-132" rx="3" ry="11" fill="#fff" opacity="0.72"/>
-            <path class="pepper-calyx"
-                  d="M-13 0 L-17 -22 L-10 -11 L-7 -26 L-3 -13 L0 -28 L3 -13 L7 -26 L10 -11 L17 -22 L13 0 Z"
-                  fill="url(#pepperStem)" stroke="#1f5e2c" stroke-width="0.6" stroke-linejoin="round"/>
-            <path class="leaf leaf--left"
-                  d="M-11 -8 C-27 -12,-36 -26,-31 -40 C-23 -35,-16 -24,-11 -8 Z"
-                  fill="url(#leafGrad)" stroke="#1a5e26" stroke-width="0.5" stroke-linejoin="round"/>
-            <path class="leaf leaf--right"
-                  d="M11 -8 C27 -12,36 -26,31 -40 C23 -35,16 -24,11 -8 Z"
-                  fill="url(#leafGrad)" stroke="#1a5e26" stroke-width="0.5" stroke-linejoin="round"/>
-            <path class="leaf-vein"
-                  d="M-11 -8 L-29 -36 M11 -8 L29 -36"
-                  stroke="rgba(20,60,25,.6)" stroke-width="0.5" fill="none"/>
+            <!-- Ствол -->
+            <g class="trunk">
+              <path class="trunk-main" d="M-5 0 C-4 -40,-3 -90,-2 -150 L2 -150 C3 -90,4 -40,5 0 Z" fill="url(#trunkGrad)" stroke="#0d2a14" stroke-width="0.6" stroke-linejoin="round"/>
+              <path class="trunk-shade" d="M0 0 C0 -40,0 -90,0 -150 L2 -150 C3 -90,4 -40,5 0 Z" fill="url(#trunkShade)"/>
+              <path class="trunk-texture" d="M-2 -28 C0 -50,-1 -70,-2 -92 M2 -108 C0 -120,0 -132,-1 -142" stroke="rgba(15,45,22,.5)" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+            </g>
+            <!-- Ветка A (левая) + перец A -->
+            <g class="branch branch--A">
+              <path class="branch-stem" d="M0 -85 C-18 -90,-36 -104,-48 -118" stroke="url(#trunkGrad)" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+              <path class="leaf-bush leaf--A1" d="M-22 -92 C-34 -90,-42 -82,-38 -74 C-30 -76,-20 -86,-22 -92 Z" fill="url(#leafGrad)" stroke="#1a5e26" stroke-width="0.5" stroke-linejoin="round"/>
+              <path class="leaf-bush leaf--A2" d="M-36 -106 C-46 -104,-52 -96,-48 -88 C-40 -90,-32 -100,-36 -106 Z" fill="url(#leafGrad)" stroke="#1a5e26" stroke-width="0.5" stroke-linejoin="round"/>
+              <path class="leaf-vein-bush" d="M-22 -92 L-38 -78 M-36 -106 L-48 -90" stroke="rgba(20,60,25,.55)" stroke-width="0.4" fill="none"/>
+              <g transform="translate(-48 -118)">
+                <g class="pepper pepper--A">
+                  <ellipse class="pepper-pulse" cx="0" cy="44" rx="16" ry="50" fill="url(#pepperGlow)"/>
+                  <path class="pepper-calyx" d="M-5 0 L-6 -5 L-3 -2 L0 -6 L3 -2 L6 -5 L5 0 Z" fill="url(#pepperStem)" stroke="#1f5e2c" stroke-width="0.5" stroke-linejoin="round"/>
+                  <path class="pepper-body" d="M0 0 C-9 4,-12 22,-10 44 C-8 64,-3 78,3 85 Q7 89,9 83 Q8 75,7 65 C9 45,12 22,9 2 Q5 -2,0 0 Z" fill="url(#pepperBody)" stroke="rgba(120,10,5,.55)" stroke-width="0.7" stroke-linejoin="round"/>
+                  <path class="pepper-shade" d="M0 0 C-9 4,-12 22,-10 44 C-8 64,-3 78,3 85 Q7 89,9 83 Q8 75,7 65 C9 45,12 22,9 2 Q5 -2,0 0 Z" fill="url(#pepperShade)"/>
+                  <path class="pepper-vein" d="M2 6 C0 30,-2 58,3 82" stroke="rgba(70,12,6,.5)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+                  <ellipse class="pepper-spec" cx="-4" cy="44" rx="4" ry="20" fill="url(#pepperSpec)" transform="rotate(-8 -4 44)"/>
+                </g>
+              </g>
+            </g>
+            <!-- Ветка B (правая) + перец B -->
+            <g class="branch branch--B">
+              <path class="branch-stem" d="M0 -110 C18 -114,36 -128,50 -142" stroke="url(#trunkGrad)" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+              <path class="leaf-bush leaf--B1" d="M22 -118 C34 -116,42 -108,38 -100 C30 -102,20 -112,22 -118 Z" fill="url(#leafGrad)" stroke="#1a5e26" stroke-width="0.5" stroke-linejoin="round"/>
+              <path class="leaf-bush leaf--B2" d="M38 -132 C48 -130,54 -122,50 -114 C42 -116,34 -126,38 -132 Z" fill="url(#leafGrad)" stroke="#1a5e26" stroke-width="0.5" stroke-linejoin="round"/>
+              <path class="leaf-vein-bush" d="M22 -118 L38 -104 M38 -132 L50 -116" stroke="rgba(20,60,25,.55)" stroke-width="0.4" fill="none"/>
+              <g transform="translate(50 -142)">
+                <g class="pepper pepper--B">
+                  <ellipse class="pepper-pulse" cx="0" cy="44" rx="16" ry="50" fill="url(#pepperGlow)"/>
+                  <path class="pepper-calyx" d="M-5 0 L-6 -5 L-3 -2 L0 -6 L3 -2 L6 -5 L5 0 Z" fill="url(#pepperStem)" stroke="#1f5e2c" stroke-width="0.5" stroke-linejoin="round"/>
+                  <path class="pepper-body" d="M0 0 C9 4,12 22,10 44 C8 64,3 78,-3 85 Q-7 89,-9 83 Q-8 75,-7 65 C-9 45,-12 22,-9 2 Q-5 -2,0 0 Z" fill="url(#pepperBody)" stroke="rgba(120,10,5,.55)" stroke-width="0.7" stroke-linejoin="round"/>
+                  <path class="pepper-shade" d="M0 0 C9 4,12 22,10 44 C8 64,3 78,-3 85 Q-7 89,-9 83 Q-8 75,-7 65 C-9 45,-12 22,-9 2 Q-5 -2,0 0 Z" fill="url(#pepperShade)"/>
+                  <path class="pepper-vein" d="M-2 6 C0 30,2 58,-3 82" stroke="rgba(70,12,6,.5)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+                  <ellipse class="pepper-spec" cx="4" cy="44" rx="4" ry="20" fill="url(#pepperSpec)" transform="rotate(8 4 44)"/>
+                </g>
+              </g>
+            </g>
+            <!-- Ветка C (верхняя, малая) + перец C (малый) -->
+            <g class="branch branch--C">
+              <path class="branch-stem" d="M0 -145 C4 -155,8 -165,10 -172" stroke="url(#trunkGrad)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+              <path class="leaf-bush leaf--C1" d="M4 -158 C-3 -160,-9 -154,-7 -148 C-1 -150,5 -154,4 -158 Z" fill="url(#leafGrad)" stroke="#1a5e26" stroke-width="0.4" stroke-linejoin="round"/>
+              <g transform="translate(10 -172) scale(0.72)">
+                <g class="pepper pepper--C">
+                  <ellipse class="pepper-pulse" cx="0" cy="44" rx="16" ry="50" fill="url(#pepperGlow)"/>
+                  <path class="pepper-calyx" d="M-5 0 L-6 -5 L-3 -2 L0 -6 L3 -2 L6 -5 L5 0 Z" fill="url(#pepperStem)" stroke="#1f5e2c" stroke-width="0.5" stroke-linejoin="round"/>
+                  <path class="pepper-body" d="M0 0 C-9 4,-12 22,-10 44 C-8 64,-3 78,3 85 Q7 89,9 83 Q8 75,7 65 C9 45,12 22,9 2 Q5 -2,0 0 Z" fill="url(#pepperBody)" stroke="rgba(120,10,5,.55)" stroke-width="0.7" stroke-linejoin="round"/>
+                  <path class="pepper-shade" d="M0 0 C-9 4,-12 22,-10 44 C-8 64,-3 78,3 85 Q7 89,9 83 Q8 75,7 65 C9 45,12 22,9 2 Q5 -2,0 0 Z" fill="url(#pepperShade)"/>
+                  <path class="pepper-vein" d="M2 6 C0 30,-2 58,3 82" stroke="rgba(70,12,6,.5)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+                  <ellipse class="pepper-spec" cx="-4" cy="44" rx="4" ry="20" fill="url(#pepperSpec)" transform="rotate(-8 -4 44)"/>
+                </g>
+              </g>
+            </g>
           </g>
         </svg>
       </div>
-      <div class="plant__stem"></div>
     </div>
     <div class="pot-dish"></div>
 

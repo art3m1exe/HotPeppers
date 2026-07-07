@@ -349,29 +349,30 @@ button{font-family:inherit;color:inherit;}
 
 /* ============================ PLANT ============================ */
 .plant{position:relative;z-index:2;width:180px;height:210px;display:flex;align-items:flex-end;justify-content:center;will-change:transform;cursor:pointer;}
-.plant__stem{width:8px;height:0;background:linear-gradient(180deg, #43e36b, #ff3b30);border-radius:5px;transition:height 1.2s var(--ease);box-shadow:0 0 8px rgba(67,227,107,.35);}
 .plant__leaves{position:absolute;bottom:0;left:50%;transform:translateX(-50%) scale(0);width:180px;height:180px;transition:transform 1.2s var(--ease), opacity .8s var(--ease);opacity:0;display:grid;place-items:end center;will-change:transform,opacity;}
 .plant__svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 6px 18px rgba(0,0,0,.55));}
 
-/* Фоновая огненная аура — пульсация */
-.plant__svg .aura{transform-origin:0 -72px;animation:auraPulse 2.8s ease-in-out infinite;will-change:transform,opacity;}
+/* Фоновая огненная аура растения — пульсация */
+.plant__svg .aura{transform-box:fill-box;transform-origin:center;animation:auraPulse 2.8s ease-in-out infinite;will-change:transform,opacity;}
 @keyframes auraPulse{0%,100%{opacity:.5;transform:scale(1);}50%{opacity:.95;transform:scale(1.14);}}
 
-/* Внутренний glow перца */
-.pepper-pulse{transform-origin:0 -76px;animation:pepperGlow 3.2s ease-in-out infinite;will-change:transform,opacity;}
+/* Glow каждого перца (3 шт) */
+.pepper-pulse{transform-box:fill-box;transform-origin:center;animation:pepperGlow 3.2s ease-in-out infinite;will-change:transform,opacity;}
 @keyframes pepperGlow{0%,100%{opacity:.4;transform:scale(1);}50%{opacity:.85;transform:scale(1.1);}}
 
-/* Группа перца: покачивание (transform) + дыхание (scale-свойство, не конфликтует) */
+/* Всё растение: покачивание + дыхание */
 .plant__svg .leaves{transform-origin:0 0;animation:leafSway 4.2s ease-in-out infinite, pepperBreathe 3.6s ease-in-out infinite;will-change:transform,scale;}
 @keyframes leafSway{0%,100%{transform:rotate(-1.6deg);}50%{transform:rotate(1.6deg);}}
 @keyframes pepperBreathe{0%,100%{scale:1;}50%{scale:1.04;}}
 
-.plant--s0 .plant__stem{height:8px;width:14px;border-radius:6px;background:#3a3a40;}
-.plant--s1 .plant__stem{height:50px;}
+/* Каждый перец — маятниковое покачивание от плодоножки, фазы сдвинуты */
+.plant__svg .pepper{transform-box:fill-box;transform-origin:top center;animation:pepperSway 3.4s ease-in-out infinite;will-change:transform;}
+.plant__svg .pepper--B{animation-delay:-1.1s;}
+.plant__svg .pepper--C{animation-delay:-2.2s;animation-duration:2.9s;}
+@keyframes pepperSway{0%,100%{transform:rotate(-2.2deg);}50%{transform:rotate(2.2deg);}}
+
 .plant--s1 .plant__leaves{opacity:1;transform:translateX(-50%) scale(.35);}
-.plant--s2 .plant__stem{height:110px;}
 .plant--s2 .plant__leaves{opacity:1;transform:translateX(-50%) scale(.7);}
-.plant--s3 .plant__stem{height:150px;}
 .plant--s3 .plant__leaves{opacity:1;transform:translateX(-50%) scale(1);}
 
 /* Body-language */
