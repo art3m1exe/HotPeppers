@@ -97,34 +97,86 @@
 
     <div class="plant plant--s0 plant--happy" id="plant">
       <div class="plant__leaves">
-        <svg class="plant__svg" viewBox="-100 -160 200 200" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+        <svg class="plant__svg" viewBox="-110 -175 220 215" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
           <defs>
-            <linearGradient id="pepperBody" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0" stop-color="#43e36b"/>
-              <stop offset="0.12" stop-color="#9bc73b"/>
-              <stop offset="0.28" stop-color="#ffb300"/>
-              <stop offset="0.55" stop-color="#ff8c00"/>
-              <stop offset="0.82" stop-color="#ff5a1f"/>
-              <stop offset="1" stop-color="#ff3b30"/>
-            </linearGradient>
-            <linearGradient id="pepperStem" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0" stop-color="#2d8a3f"/>
-              <stop offset="1" stop-color="#5ad07a"/>
-            </linearGradient>
-            <radialGradient id="pepperGlow" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0" stop-color="#ffb300" stop-opacity="0.65"/>
-              <stop offset="0.6" stop-color="#ff8c00" stop-opacity="0.25"/>
+            <radialGradient id="auraFire" cx="0.5" cy="0.55" r="0.55">
+              <stop offset="0" stop-color="#ffd84a" stop-opacity="0.6"/>
+              <stop offset="0.3" stop-color="#ff9e1a" stop-opacity="0.4"/>
+              <stop offset="0.65" stop-color="#ff3b30" stop-opacity="0.16"/>
               <stop offset="1" stop-color="#ff3b30" stop-opacity="0"/>
             </radialGradient>
+            <linearGradient id="pepperBody" x1="0.2" y1="0" x2="0.8" y2="1">
+              <stop offset="0" stop-color="#7ee36b"/>
+              <stop offset="0.14" stop-color="#b8e03b"/>
+              <stop offset="0.3" stop-color="#ffd84a"/>
+              <stop offset="0.48" stop-color="#ff9e1a"/>
+              <stop offset="0.68" stop-color="#ff5a1f"/>
+              <stop offset="0.87" stop-color="#ff3b30"/>
+              <stop offset="1" stop-color="#c81e16"/>
+            </linearGradient>
+            <linearGradient id="pepperShade" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#000" stop-opacity="0"/>
+              <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
+              <stop offset="0.82" stop-color="#7a0e08" stop-opacity="0.42"/>
+              <stop offset="1" stop-color="#4a0805" stop-opacity="0.66"/>
+            </linearGradient>
+            <radialGradient id="pepperSpec" cx="0.4" cy="0.3" r="0.4">
+              <stop offset="0" stop-color="#fff" stop-opacity="0.9"/>
+              <stop offset="0.45" stop-color="#fff" stop-opacity="0.35"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="pepperGlow" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#ffd84a" stop-opacity="0.78"/>
+              <stop offset="0.5" stop-color="#ff8c00" stop-opacity="0.32"/>
+              <stop offset="1" stop-color="#ff3b30" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="pepperStem" x1="0" y1="1" x2="0.4" y2="0">
+              <stop offset="0" stop-color="#1f5e2c"/>
+              <stop offset="0.5" stop-color="#3a9c4a"/>
+              <stop offset="1" stop-color="#7fd06a"/>
+            </linearGradient>
+            <linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5ad07a"/>
+              <stop offset="0.5" stop-color="#2d8a3f"/>
+              <stop offset="1" stop-color="#1a5e26"/>
+            </linearGradient>
+            <filter id="auraBlur" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="7"/>
+            </filter>
           </defs>
+          <g class="aura">
+            <ellipse class="aura-fire" cx="0" cy="-72" rx="92" ry="108" fill="url(#auraFire)" filter="url(#auraBlur)"/>
+            <ellipse class="aura-core" cx="0" cy="-72" rx="54" ry="82" fill="url(#pepperGlow)"/>
+          </g>
+          <ellipse class="pepper-shadow" cx="0" cy="3" rx="24" ry="6" fill="#000" opacity="0.5" filter="url(#auraBlur)"/>
           <g class="leaves">
-            <ellipse class="pepper-pulse" cx="0" cy="-75" rx="34" ry="78" fill="url(#pepperGlow)"/>
-            <path d="M0 0 C-14 -8,-22 -38,-20 -74 C-18 -112,-10 -142,2 -150 Q8 -156,14 -148 Q16 -140,12 -132 C14 -108,18 -78,16 -44 C16 -20,8 -5,0 0 Z"
-                  fill="url(#pepperBody)" stroke="rgba(255,59,48,.35)" stroke-width="0.6" stroke-linejoin="round"/>
-            <path d="M-10 0 L-12 -16 L-6 -8 L-3 -20 L0 -10 L3 -20 L6 -8 L12 -16 L10 0 Z"
-                  fill="url(#pepperStem)" stroke="#2d8a3f" stroke-width="0.5" stroke-linejoin="round"/>
-            <path d="M-14 -18 C-20 -45,-18 -85,-14 -125"
-                  stroke="rgba(255,255,255,.45)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <ellipse class="pepper-pulse" cx="0" cy="-76" rx="38" ry="84" fill="url(#pepperGlow)"/>
+            <path class="pepper-body"
+                  d="M0 2 C-17 -8,-27 -42,-25 -82 C-23 -122,-12 -154,2 -162 Q10 -168,17 -158 Q19 -148,14 -138 C16 -112,21 -78,19 -42 C19 -18,9 -2,0 2 Z"
+                  fill="url(#pepperBody)" stroke="rgba(120,10,5,.55)" stroke-width="0.8" stroke-linejoin="round"/>
+            <path class="pepper-shade"
+                  d="M0 2 C-17 -8,-27 -42,-25 -82 C-23 -122,-12 -154,2 -162 Q10 -168,17 -158 Q19 -148,14 -138 C16 -112,21 -78,19 -42 C19 -18,9 -2,0 2 Z"
+                  fill="url(#pepperShade)"/>
+            <path class="pepper-vein"
+                  d="M4 -2 C-9 -42,-13 -92,-7 -150"
+                  stroke="rgba(70,12,6,.52)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+            <path class="pepper-vein-s"
+                  d="M-2 -42 C-8 -46,-14 -44,-18 -38 M-2 -74 C-9 -78,-15 -76,-19 -68 M-2 -106 C-8 -110,-13 -108,-16 -102"
+                  stroke="rgba(70,12,6,.32)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+            <ellipse class="pepper-spec" cx="-8" cy="-96" rx="8" ry="36" fill="url(#pepperSpec)" transform="rotate(-9 -8 -96)"/>
+            <ellipse class="pepper-spec-sm" cx="-6" cy="-132" rx="3" ry="11" fill="#fff" opacity="0.72"/>
+            <path class="pepper-calyx"
+                  d="M-13 0 L-17 -22 L-10 -11 L-7 -26 L-3 -13 L0 -28 L3 -13 L7 -26 L10 -11 L17 -22 L13 0 Z"
+                  fill="url(#pepperStem)" stroke="#1f5e2c" stroke-width="0.6" stroke-linejoin="round"/>
+            <path class="leaf leaf--left"
+                  d="M-11 -8 C-27 -12,-36 -26,-31 -40 C-23 -35,-16 -24,-11 -8 Z"
+                  fill="url(#leafGrad)" stroke="#1a5e26" stroke-width="0.5" stroke-linejoin="round"/>
+            <path class="leaf leaf--right"
+                  d="M11 -8 C27 -12,36 -26,31 -40 C23 -35,16 -24,11 -8 Z"
+                  fill="url(#leafGrad)" stroke="#1a5e26" stroke-width="0.5" stroke-linejoin="round"/>
+            <path class="leaf-vein"
+                  d="M-11 -8 L-29 -36 M11 -8 L29 -36"
+                  stroke="rgba(20,60,25,.6)" stroke-width="0.5" fill="none"/>
           </g>
         </svg>
       </div>
