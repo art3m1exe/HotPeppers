@@ -19,3 +19,6 @@ node_modules/
 .env
 .env.*
 !.env.example
+
+# Generated source images (keep only compressed assets in repo)
+Gemini_Generated_Image_*.png
