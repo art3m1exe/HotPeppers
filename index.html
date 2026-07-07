@@ -97,7 +97,36 @@
 
     <div class="plant plant--s0 plant--happy" id="plant">
       <div class="plant__leaves">
-        <img class="plant__svg" src="pepper.webp" alt="" draggable="false" aria-hidden="true">
+        <svg class="plant__svg" viewBox="-100 -160 200 200" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+          <defs>
+            <linearGradient id="pepperBody" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0" stop-color="#43e36b"/>
+              <stop offset="0.12" stop-color="#9bc73b"/>
+              <stop offset="0.28" stop-color="#ffb300"/>
+              <stop offset="0.55" stop-color="#ff8c00"/>
+              <stop offset="0.82" stop-color="#ff5a1f"/>
+              <stop offset="1" stop-color="#ff3b30"/>
+            </linearGradient>
+            <linearGradient id="pepperStem" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0" stop-color="#2d8a3f"/>
+              <stop offset="1" stop-color="#5ad07a"/>
+            </linearGradient>
+            <radialGradient id="pepperGlow" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#ffb300" stop-opacity="0.65"/>
+              <stop offset="0.6" stop-color="#ff8c00" stop-opacity="0.25"/>
+              <stop offset="1" stop-color="#ff3b30" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <g class="leaves">
+            <ellipse class="pepper-pulse" cx="0" cy="-75" rx="34" ry="78" fill="url(#pepperGlow)"/>
+            <path d="M0 0 C-14 -8,-22 -38,-20 -74 C-18 -112,-10 -142,2 -150 Q8 -156,14 -148 Q16 -140,12 -132 C14 -108,18 -78,16 -44 C16 -20,8 -5,0 0 Z"
+                  fill="url(#pepperBody)" stroke="rgba(255,59,48,.35)" stroke-width="0.6" stroke-linejoin="round"/>
+            <path d="M-10 0 L-12 -16 L-6 -8 L-3 -20 L0 -10 L3 -20 L6 -8 L12 -16 L10 0 Z"
+                  fill="url(#pepperStem)" stroke="#2d8a3f" stroke-width="0.5" stroke-linejoin="round"/>
+            <path d="M-14 -18 C-20 -45,-18 -85,-14 -125"
+                  stroke="rgba(255,255,255,.45)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
       </div>
       <div class="plant__stem"></div>
     </div>
