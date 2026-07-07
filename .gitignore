@@ -14,3 +14,8 @@ node_modules/
 
 # Local logs
 *.log
+
+# Secrets / env (never commit tokens)
+.env
+.env.*
+!.env.example
