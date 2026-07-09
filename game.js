@@ -13,7 +13,7 @@ if (tg) {
 const CONFIG = {
   tickMs: 1000,
   saveMs: 10000,
-  storageKey: "alienGroverSave",
+  storageKey: "hotPepperSave",
   eventMinMs: 60000,
   eventMaxMs: 120000,
   eventChance: 0.18,
@@ -22,8 +22,8 @@ const CONFIG = {
     foodDecay: 0.0022,
     lightOnGain: 0.0014,
     lightOffLoss: 0.0014,
-    growth: 0.0024,
-    growthBad: 0.0004,
+    growth: 0.056,
+    growthBad: 0.0093,
     healthGood: 0.02,
     healthBad: 0.005,
   },
@@ -33,38 +33,38 @@ const CONFIG = {
 };
 
 const STRAINS = [
-  { id: "star1",   name: "Звездоцвет-Альфа",  tier: "Стартовый",   seedPrice: 0,    baseReward: 60,   greenZone: { min: 25, max: 90 }, minLevel: 1,  starterDecay: true },
-  { id: "aurora",  name: "Аврора-Нексус",     tier: "Базовый",     seedPrice: 100,  baseReward: 150,  greenZone: { min: 38, max: 82 }, minLevel: 1 },
-  { id: "cryo",    name: "Крио-Спора",        tier: "Средний",     seedPrice: 400,  baseReward: 380,  greenZone: { min: 45, max: 75 }, minLevel: 3 },
-  { id: "pulsar",  name: "Пульсар-47",        tier: "Продвинутый", seedPrice: 1200, baseReward: 900,  greenZone: { min: 50, max: 70 }, minLevel: 5 },
-  { id: "orion",   name: "Орион-Гало",        tier: "Элитный",     seedPrice: 3000, baseReward: 2200, greenZone: { min: 55, max: 65 }, minLevel: 7 },
-  { id: "quasar",  name: "Квазар-Голиаф",     tier: "Легендарный", seedPrice: 6500, baseReward: 5500, greenZone: { min: 55, max: 62 }, minLevel: 10 },
+  { id: "star1",   name: "Халапеньо",        tier: "Стартовый",   seedPrice: 0,    baseReward: 60,   greenZone: { min: 25, max: 90 }, minLevel: 1,  starterDecay: true },
+  { id: "aurora",  name: "Серрано",          tier: "Базовый",     seedPrice: 100,  baseReward: 150,  greenZone: { min: 38, max: 82 }, minLevel: 1 },
+  { id: "cryo",    name: "Кайен",            tier: "Средний",     seedPrice: 400,  baseReward: 380,  greenZone: { min: 45, max: 75 }, minLevel: 3 },
+  { id: "pulsar",  name: "Хабанеро",         tier: "Продвинутый", seedPrice: 1200, baseReward: 900,  greenZone: { min: 50, max: 70 }, minLevel: 5 },
+  { id: "orion",   name: "Призрачный перец", tier: "Элитный",     seedPrice: 3000, baseReward: 2200, greenZone: { min: 55, max: 65 }, minLevel: 7 },
+  { id: "quasar",  name: "Каролина Рипер",   tier: "Легендарный", seedPrice: 6500, baseReward: 5500, greenZone: { min: 55, max: 62 }, minLevel: 10 },
 ];
 
 const UPGRADES = [
   { id: "autoLight", name: "Таймер света",   desc: "Сам держит свет в зелёной зоне",           price: 120 },
   { id: "ledPro",    name: "LED Pro",        desc: "+50% к росту при включённом свете",          price: 350 },
-  { id: "autoWater", name: "Авто-плазма",     desc: "Скорость расхода плазмы ×0.5",                price: 200 },
+  { id: "autoWater", name: "Капельный полив", desc: "Скорость расхода воды ×0.5",                  price: 200 },
   { id: "phBuffer",  name: "Буфер pH",        desc: "Защита от перекорма (верх ед. до 95%)",      price: 180 },
 ];
 
 const POTS = [
-  { id: 0, name: "Камера 1", price: 0,    minLevel: 1,  owned: true  },
-  { id: 1, name: "Камера 2", price: 500,  minLevel: 3,  owned: false },
-  { id: 2, name: "Камера 3", price: 1500, minLevel: 5,  owned: false },
-  { id: 3, name: "Камера 4", price: 3000, minLevel: 7,  owned: false },
-  { id: 4, name: "Камера 5", price: 6000, minLevel: 10, owned: false },
+  { id: 0, name: "Горшок 1", price: 0,    minLevel: 1,  owned: true  },
+  { id: 1, name: "Горшок 2", price: 500,  minLevel: 3,  owned: false },
+  { id: 2, name: "Горшок 3", price: 1500, minLevel: 5,  owned: false },
+  { id: 3, name: "Горшок 4", price: 3000, minLevel: 7,  owned: false },
+  { id: 4, name: "Горшок 5", price: 6000, minLevel: 10, owned: false },
 ];
 
 const ACHIEVEMENTS = [
-  { id: "firstHarvest", name: "Первый сбор",            desc: "Извлеки первую культуру",            icon: "🧬", check: (s) => s.stats.harvests >= 1 },
-  { id: "harvest10",    name: "Ксено-биолог",           desc: "10 извлечений",                       icon: "🏆", check: (s) => s.stats.harvests >= 10 },
-  { id: "perfect",      name: "Идеальная экстракция",   desc: "Извлеки культуру со 100% HP",         icon: "💯", check: (s) => s.stats.perfectCount >= 1 },
-  { id: "level5",       name: "Опытный",                desc: "Достигни 5 уровня",                   icon: "⭐", check: (s) => s.level >= 5 },
-  { id: "strains5",     name: "Коллекционер",           desc: "Открой 5 видов",                      icon: "🌌", check: (s) => s.strains.filter(x => x.owned).length >= 5 },
-  { id: "survivor",     name: "Выживший",               desc: "Спаси культуру при <10% HP",          icon: "🛡️", check: (s) => s.stats.saves >= 1 },
-  { id: "death5",       name: "Горе-биолог",           desc: "Потеряй 5 культур",                   icon: "💀", check: (s) => s.stats.deaths >= 5 },
-  { id: "streak30",     name: "В ударе",                desc: "Streak x30",                          icon: "🔥", check: (s) => s.stats.maxStreak >= 30 },
+  { id: "firstHarvest", name: "Первый сбор",          desc: "Собери первый перец",            icon: "🌶️", check: (s) => s.stats.harvests >= 1 },
+  { id: "harvest10",    name: "Ботаник",               desc: "10 урожаев",                     icon: "🏆", check: (s) => s.stats.harvests >= 10 },
+  { id: "perfect",      name: "Идеальный урожай",       desc: "Собери перец со 100% здоровья",   icon: "💯", check: (s) => s.stats.perfectCount >= 1 },
+  { id: "level5",       name: "Опытный",                desc: "Достигни 5 уровня",              icon: "⭐", check: (s) => s.level >= 5 },
+  { id: "strains5",     name: "Коллекционер",           desc: "Открой 5 сортов",                icon: "🌶️", check: (s) => s.strains.filter(x => x.owned).length >= 5 },
+  { id: "survivor",     name: "Выживший",               desc: "Спаси перец при <10% здоровья",  icon: "🛡️", check: (s) => s.stats.saves >= 1 },
+  { id: "death5",       name: "Горе-фермер",            desc: "Потеряй 5 перцев",               icon: "💀", check: (s) => s.stats.deaths >= 5 },
+  { id: "streak30",     name: "В ударе",                desc: "Streak x30",                     icon: "🔥", check: (s) => s.stats.maxStreak >= 30 },
 ];
 
 /* ============================ STATE ============================ */
@@ -113,8 +113,16 @@ function save() {
 }
 function load() {
   try {
-    const raw = localStorage.getItem(CONFIG.storageKey);
-    if (!raw) return false;
+    let raw = localStorage.getItem(CONFIG.storageKey);
+    // Миграция со старого ключа alienGroverSave
+    if (!raw) {
+      const legacy = localStorage.getItem("alienGroverSave");
+      if (legacy) {
+        localStorage.setItem(CONFIG.storageKey, legacy);
+        localStorage.removeItem("alienGroverSave");
+        raw = legacy;
+      } else return false;
+    }
     state = Object.assign(clone(DEFAULT_STATE), JSON.parse(raw));
     applyOffline();
     return true;
@@ -162,7 +170,7 @@ function applyOffline() {
     if (p.health <= 0) {
       state.pots[idx] = null;
       state.stats.deaths++;
-      if (idx === state.activePot) deathsMsg.push("🥀 Культура " + strainById(p.strainId).name + " погибла, пока тебя не было");
+      if (idx === state.activePot) deathsMsg.push("🥀 Перец " + strainById(p.strainId).name + " погиб, пока тебя не было");
     }
   });
   const hours = Math.floor(dtSec / 3600);
@@ -191,6 +199,10 @@ function zoneFor(strainId) {
 }
 function stageFor(g) { return g < 5 ? 0 : g < 35 ? 1 : g < 75 ? 2 : 3; }
 function hasOwned(strainId) { return !!state.strains.find((x) => x.id === strainId)?.owned; }
+
+// Индексы горшков, где растение упало ниже 12 HP — для достижения survivor.
+// Хранится в памяти, НЕ сохраняется в localStorage (раньше протекало через p._saveTagged).
+const _survivors = new Set();
 
 /* ============================ AUDIO ============================ */
 let audioCtx = null;
@@ -246,7 +258,7 @@ function tickPlant(p, idx) {
   if (!p) return;
   const z = zoneFor(p.strainId);
   p.ageSec++;
-  // Мягкий старт: первые 90 сек decay ×0.6
+  // Мягкий старт: первые 30 мин decay ×0.5
   const soft = strainById(p.strainId).starterDecay && p.ageSec < 1800 ? 0.5 : 1;
 
   // Event-модификаторы decay
@@ -295,10 +307,10 @@ function tickPlant(p, idx) {
   const anyBad = p.water < 18 || p.food < 18 || p.light < 18 || p.water > 92 || p.food > 92 || p.light > 92;
   if (anyBad) {
     p.health = clamp(p.health - CONFIG.rates.healthBad);
-    if (p.health < 12 && !p._saveTagged) p._saveTagged = true; // намекает на достижение survivor
+    if (p.health < 12) _survivors.add(idx); // кандидат на достижение survivor
   } else if (allGood) {
     p.health = clamp(p.health + CONFIG.rates.healthGood);
-    if (p._saveTagged && p.health > 30) { state.stats.saves++; p._saveTagged = false; checkAchievements(); }
+    if (_survivors.has(idx) && p.health > 30) { state.stats.saves++; _survivors.delete(idx); checkAchievements(); }
   }
 
   p.stage = stageFor(p.growth);
@@ -307,8 +319,9 @@ function tickPlant(p, idx) {
   if (p.health <= 0) {
     state.pots[idx] = null;
     state.stats.deaths++;
+    _survivors.delete(idx);
     if (idx === state.activePot) {
-      toast("🥀 Культура погибла — камера свободна", "bad");
+      toast("🥀 Перец погиб — горшок свободен", "bad");
       SFX.death();
       renderEvent(idx);
     }
@@ -336,10 +349,10 @@ function loop() {
 
 /* ============================ EVENTS ============================ */
 const EVENT_TYPES = [
-  { type: "bug",   icon: "🐛", text: "Космо-клещ! Катализатор кончается быстрее. Обработай культуру!", action: "Обработать", dur: 15000 },
-  { type: "heat",  icon: "🥵", text: "Тепловой пик! Свет сам растёт. Выключай лампу!",                     dur: 10000 },
-  { type: "wind",  icon: "🌌", text: "Магнитный порыв! Плазма испаряется быстрее.",                       dur: 12000 },
-  { type: "luck",  icon: "🌟", text: "Космическая удача! Все шкалы восстанавливаются сами. +5$ бонус",     dur: 30000, luck: true },
+  { type: "bug",   icon: "🐛", text: "Тля напала! Удобрение расходуется быстрее. Обработай перец!", action: "Обработать", dur: 15000 },
+  { type: "heat",  icon: "🥵", text: "Тепловой пик! Свет сам растёт. Выключай лампу!",                dur: 10000 },
+  { type: "wind",  icon: "🌀", text: "Сквозняк! Вода испаряется быстрее.",                            dur: 12000 },
+  { type: "luck",  icon: "🍀", text: "Удача! Все шкалы сами восстанавливаются. +5 🌶️ бонус",         dur: 30000, luck: true },
 ];
 function triggerEvent() {
   const ap = activePlant();
@@ -387,19 +400,17 @@ function doWater() {
   const p = activePlant(); if (!p) return;
   const prev = p.water;
   p.water = clamp(p.water + CONFIG.action.water);
-  if (prev > 92) { p.health = clamp(p.health - CONFIG.action.overfillPenalty); toast("Избыток плазмы! -" + CONFIG.action.overfillPenalty + " HP", "bad"); }
+  if (prev > 92) { p.health = clamp(p.health - CONFIG.action.overfillPenalty); toast("Избыток воды! -" + CONFIG.action.overfillPenalty + " HP", "bad"); }
   spawnFx(["💧"]);
   SFX.water();
-  flashBall("water");
 }
 function doFeed() {
   const p = activePlant(); if (!p) return;
   const prev = p.food;
   p.food = clamp(p.food + CONFIG.action.feed);
-  if (prev > 92) { p.health = clamp(p.health - CONFIG.action.overfillPenalty); toast("Перекорм катализатором! -" + CONFIG.action.overfillPenalty + " HP", "bad"); }
+  if (prev > 92) { p.health = clamp(p.health - CONFIG.action.overfillPenalty); toast("Перекорм! -" + CONFIG.action.overfillPenalty + " HP", "bad"); }
   spawnFx(["🧪"]);
   SFX.feed();
-  flashBall("food");
 }
 function doLight() {
   const p = activePlant(); if (!p) return;
@@ -409,7 +420,7 @@ function doLight() {
 }
 function doHarvest() {
   const p = activePlant();
-  if (!p || p.growth < 100) { toast("Культура ещё не выросла", "bad"); return; }
+  if (!p || p.growth < 100) { toast("Перец ещё не вырос", "bad"); return; }
   const strain = strainById(p.strainId);
   const reward = Math.round(strain.baseReward * (p.health / 100));
   const xpGain = Math.round(reward * 0.6);
@@ -426,10 +437,11 @@ function doHarvest() {
     state.level++;
     leveled = true;
   }
-  spawnFx(["🧬", "💰"]);
+  spawnFx(["🌶️", "💰"]);
   SFX.harvest();
   // Освобождаем горшок и показываем пост-уборочную модалку (без авто-пересева)
   state.pots[state.activePot] = null;
+  _survivors.delete(state.activePot);
   renderPots();
   checkAchievements();
   save();
@@ -439,15 +451,15 @@ function plantSeed(strainId) {
   const s = strainById(strainId);
   if (!hasOwned(strainId)) {
     if (state.level < s.minLevel) { toast("Требуется уровень " + s.minLevel, "bad"); return; }
-    if (state.money < s.seedPrice) { toast("Не хватает $" + s.seedPrice, "bad"); return; }
+    if (state.money < s.seedPrice) { toast("Не хватает 🌶️ " + s.seedPrice, "bad"); return; }
     state.money -= s.seedPrice;
     state.strains.find(x => x.id === strainId).owned = true;
-    toast("Открыт вид: " + s.name, "ach");
+    toast("Открыт сорт: " + s.name, "ach");
     beep(660, 80);
   }
-  if (activePlant()) { if (!confirm("Заменить текущую культуру? Прогресс будет потерян.")) return; }
+  if (activePlant()) { if (!confirm("Заменить текущий перец? Прогресс будет потерян.")) return; }
   state.pots[state.activePot] = makePlant(strainId);
-  toast("Запущена культура: " + s.name, "good");
+  toast("Посажен сорт: " + s.name, "good");
   renderPots();
   checkAchievements();
 }
@@ -457,7 +469,7 @@ let lastHarvest = null;
 function openHarvestModal(info) {
   lastHarvest = info;
   const m = $("#harvestModal");
-  $("#harvestReward").textContent = "+$" + info.reward;
+  $("#harvestReward").textContent = "+🌶️ " + info.reward;
   $("#harvestXp").textContent = "+" + info.xpGain + " XP";
   $("#harvestStrain").textContent = info.strainName;
   $("#harvestPerfect").style.display = info.perfect ? "" : "none";
@@ -465,19 +477,19 @@ function openHarvestModal(info) {
   m.setAttribute("aria-hidden", "false");
   beep(660, 80);
   if (info.leveled) SFX.level();
-  else toast(`+$${info.reward} · +${info.xpGain} XP`, "good");
+  else toast(`+🌶️ ${info.reward} · +${info.xpGain} XP`, "good");
 }
 function closeHarvestModal() { $("#harvestModal").setAttribute("aria-hidden", "true"); lastHarvest = null; }
 function plantSameStrain() {
   if (!lastHarvest) { closeHarvestModal(); return; }
   const id = lastHarvest.strainId;
   if (!hasOwned(id)) id = "star1";
-  if (activePlant() && !confirm("Заменить текущую культуру?")) return;
+  if (activePlant() && !confirm("Заменить текущий перец?")) return;
   state.pots[state.activePot] = makePlant(id);
   closeHarvestModal();
   renderPots();
   render();
-  toast("Запущена культура: " + strainById(id).name, "good");
+  toast("Посажен сорт: " + strainById(id).name, "good");
 }
 function harvestGoShop() {
   closeHarvestModal();
@@ -499,16 +511,38 @@ function spawnFx(emojis) {
     setTimeout(() => span.remove(), 1300);
   });
 }
-function flashBall() {}
 
 /* ============================ RENDER ============================ */
+// Плавный твин чисел через requestAnimationFrame (ease-out-cubic, ~400ms).
+// Хранит активный твин на el._tween; повторный запуск отменяет предыдущий.
+// formatter применяет итоговое значение (по умолчанию Math.round).
+function tweenNum(el, to, formatter) {
+  if (!el) return;
+  if (typeof formatter !== "function") formatter = (v) => Math.round(v);
+  const target = formatter(to);
+  const curTxt = el.textContent;
+  if (curTxt === String(target)) return;
+  const from = parseFloat(curTxt) || 0;
+  if (el._tween) cancelAnimationFrame(el._tween);
+  if (from === to) { el.textContent = String(target); return; }
+  const DUR = 400, t0 = performance.now();
+  const step = (now) => {
+    const t = Math.min(1, (now - t0) / DUR);
+    const e = 1 - Math.pow(1 - t, 3); // ease-out-cubic
+    el.textContent = String(formatter(from + (to - from) * e));
+    if (t < 1) el._tween = requestAnimationFrame(step);
+    else { el._tween = null; el.textContent = String(target); }
+  };
+  el._tween = requestAnimationFrame(step);
+}
+
 const _meterCache = {};
 function setMeter(name, value) {
   const row = document.querySelector(`[data-meter="${name}"]`);
   if (!row) return;
-  const txt = Math.round(value) + "%";
   const valEl = $(".meter__value", row);
-  if (valEl.textContent !== txt) valEl.textContent = txt;
+  const want = Math.round(value);
+  if (_meterCache[name + "_v"] !== want) { tweenNum(valEl, value); _meterCache[name + "_v"] = want; }
   const fill = $(".meter__fill", row);
   const w = Math.round(value * 10) / 10;
   if (_meterCache[name] !== w) { fill.style.setProperty("--w", value + "%"); _meterCache[name] = w; }
@@ -521,16 +555,14 @@ function setMeter(name, value) {
   if (u) u.setAttribute("aria-hidden", wantDanger ? "false" : "true");
 }
 
+let _hudMoneyT = -1, _hudXpT = -1, _hudLevelT = -1;
 function renderHUD() {
-  const m = "$" + state.money;
   const me = $("#hudMoney .stat__value");
-  if (me.textContent !== m) me.textContent = m;
-  const xp = String(state.xp);
+  if (_hudMoneyT !== state.money) { tweenNum(me, state.money); _hudMoneyT = state.money; }
   const xe = $("#hudXp .stat__value");
-  if (xe.textContent !== xp) xe.textContent = xp;
-  const lv = String(state.level);
+  if (_hudXpT !== state.xp) { tweenNum(xe, state.xp); _hudXpT = state.xp; }
   const le = $("#hudLevel .stat__value");
-  if (le.textContent !== lv) le.textContent = lv;
+  if (_hudLevelT !== state.level) { tweenNum(le, state.level); _hudLevelT = state.level; }
   const mu = state.muted ? "🔇" : "🔊";
   const mb = $("#btnMute");
   if (mb.textContent !== mu) mb.textContent = mu;
@@ -549,21 +581,21 @@ function renderHUD() {
 }
 
 function moodAndSpeech(p) {
-  let mood = "🙂", speech = "🧬 Расту!";
+  let mood = "🙂", speech = "🌶️ Расту!";
   if (!p) return null;
   const z = zoneFor(p.strainId);
 
   // Приоритет критики
   if (p.health <= 20) { mood = "🥀"; speech = "🥀 Мне плохо..."; }
-  else if (p.water < 22) { mood = "😟"; speech = "💠 Хочу плазмы!"; }
-  else if (p.food < 22)  { mood = "😟"; speech = "🧪 Нужен катализатор!"; }
-  else if (p.light < 22 && !p.lightOn) { mood = "😟"; speech = "💡 Темно..."; }
+  else if (p.water < 22) { mood = "😟"; speech = "💧 Хочу пить!"; }
+  else if (p.food < 22)  { mood = "😟"; speech = "🧪 Нужны удобрения!"; }
+  else if (p.light < 22 && !p.lightOn) { mood = "😟"; speech = "☀️ Темно..."; }
   else if (p.light > 92 && p.lightOn) { mood = "🥵"; speech = "🥵 Жарко!"; }
-  else if (p.water > 90) { mood = "😌"; speech = "💠 Избыток плазмы..."; }
+  else if (p.water > 90) { mood = "😌"; speech = "💧 Перелив..."; }
   else if (p.food > 90)  { mood = "😌"; speech = "🧪 Перекорм..."; }
-  else if (p.growth >= 100) { mood = "😍"; speech = "🧬 Готова к извлечению!"; }
+  else if (p.growth >= 100) { mood = "😍"; speech = "🌶️ Готов к сбору!"; }
   else if (p.streak >= 10) { mood = "😍"; speech = "😊 Всё отлично!"; }
-  else { mood = "🙂"; speech = "🧬 Расту..."; }
+  else { mood = "🙂"; speech = "🌶️ Расту..."; }
 
   // Body-language class для plant
   let bodyClass = "plant--happy";
@@ -589,7 +621,7 @@ function renderPlant() {
     if (lastBodyClass !== "plant--happy") { plantEl.classList.remove(...plantEl.classList.values().filter(c => c.startsWith("plant--") && !c.startsWith("plant--s"))); plantEl.classList.add("plant--happy"); lastBodyClass = "plant--happy"; }
     if (speechEl.getAttribute("aria-hidden") !== "true") speechEl.setAttribute("aria-hidden", "true");
     if (moodEl.textContent !== "💤") moodEl.textContent = "💤";
-    if (strainName.textContent !== "Пустая камера") strainName.textContent = "Пустая камера";
+    if (strainName.textContent !== "Пустой горшок") strainName.textContent = "Пустой горшок";
     if (strainBadge.textContent !== "—") strainBadge.textContent = "—";
     lastStrainId = "";
     lastSpeech = ""; lastMood = ""; lastLightOn = null;
@@ -635,7 +667,7 @@ function renderPlant() {
     const lampBtn = $("#btnLight");
     if (lampBtn) lampBtn.classList.toggle("btn--lamp-on", on);
     $("#sky").style.background = on
-      ? "linear-gradient(180deg, rgba(168,85,247,0.42) 0%, rgba(57,255,20,0.18) 55%, rgba(168,85,247,0.26) 100%)"
+      ? "linear-gradient(180deg, rgba(255,140,0,0.42) 0%, rgba(255,179,0,0.18) 55%, rgba(255,59,48,0.26) 100%)"
       : "linear-gradient(180deg, rgba(10,10,14,0.62) 0%, rgba(20,20,26,0.42) 100%)";
     lastLightOn = on;
   }
@@ -661,14 +693,14 @@ function renderProgress() {
   const eta = $("#growthEta");
   if (!p) {
     if (_lastGrowthW !== 0) { bar.style.setProperty("--w", "0%"); _lastGrowthW = 0; }
-    if (_lastGrowthTxt !== "0%") { pct.textContent = "0%"; _lastGrowthTxt = "0%"; }
-    if (_lastEta !== "Запустите спору") { eta.textContent = "Запустите спору"; _lastEta = "Запустите спору"; }
+    if (_lastGrowthTxt !== "0%") { tweenNum(pct, 0, (v) => Math.round(v) + "%"); _lastGrowthTxt = "0%"; }
+    if (_lastEta !== "Посадите саженец") { eta.textContent = "Посадите саженец"; _lastEta = "Посадите саженец"; }
     return;
   }
   const w = Math.round(p.growth * 10) / 10;
   if (_lastGrowthW !== w) { bar.style.setProperty("--w", p.growth + "%"); _lastGrowthW = w; }
   const pctTxt = Math.round(p.growth) + "%";
-  if (_lastGrowthTxt !== pctTxt) { pct.textContent = pctTxt; _lastGrowthTxt = pctTxt; }
+  if (_lastGrowthTxt !== pctTxt) { tweenNum(pct, p.growth, (v) => Math.round(v) + "%"); _lastGrowthTxt = pctTxt; }
   let etaTxt;
   if (p.growth >= 100) etaTxt = "Готов!";
   else {
@@ -769,7 +801,7 @@ function closeShop() { shopModal.setAttribute("aria-hidden", "true"); }
 function buyUpgrade(id) {
   const u = UPGRADES.find(x => x.id === id);
   if (!u || state.upgrades[id]) return;
-  if (state.money < u.price) { toast("Не хватает $" + u.price, "bad"); return; }
+  if (state.money < u.price) { toast("Не хватает 🌶️ " + u.price, "bad"); return; }
   state.money -= u.price;
   state.upgrades[id] = true;
   toast("Куплено: " + u.name, "ach");
@@ -780,7 +812,7 @@ function buyPot(id) {
   const slot = POTS.find(p => p.id === id);
   if (!slot || state.potsOwned[id]) return;
   if (state.level < slot.minLevel) { toast("Требуется ур." + slot.minLevel, "bad"); return; }
-  if (state.money < slot.price) { toast("Не хватает $" + slot.price, "bad"); return; }
+  if (state.money < slot.price) { toast("Не хватает 🌶️ " + slot.price, "bad"); return; }
   state.money -= slot.price;
   state.potsOwned[id] = true;
   toast("Открыт: " + slot.name, "ach");
@@ -795,7 +827,7 @@ function renderShop() {
   // Семена
   const sg = document.createElement("section");
   sg.className = "shop__group";
-  sg.innerHTML = "<h4>🧬 Споры</h4>";
+  sg.innerHTML = "<h4>🌶️ Саженцы</h4>";
   STRAINS.forEach(s => {
     const owned = hasOwned(s.id);
     const locked = state.level < s.minLevel;
@@ -803,8 +835,8 @@ function renderShop() {
     btn.className = "shop__item" + (locked ? " shop__item--locked" : "");
     btn.innerHTML = `
       <span class="shop__name">${s.name} ${locked ? "🔒" : ""}</span>
-      <span class="shop__desc">${s.tier} · награда $${s.baseReward} · зона ${s.greenZone.min}-${s.greenZone.max}%${locked ? " · ур." + s.minLevel : ""}</span>
-      <span class="shop__price">${owned ? "Посадить" : "$" + s.seedPrice}</span>`;
+      <span class="shop__desc">${s.tier} · награда 🌶️${s.baseReward} · зона ${s.greenZone.min}-${s.greenZone.max}%${locked ? " · ур." + s.minLevel : ""}</span>
+      <span class="shop__price">${owned ? "Посадить" : "🌶️ " + s.seedPrice}</span>`;
     if (!locked) btn.onclick = () => { plantSeed(s.id); closeShop(); };
     sg.appendChild(btn);
   });
@@ -821,7 +853,7 @@ function renderShop() {
     btn.innerHTML = `
       <span class="shop__name">${u.name}${owned ? " ✓" : ""}</span>
       <span class="shop__desc">${u.desc}</span>
-      <span class="shop__price">${owned ? "Куплено" : "$" + u.price}</span>`;
+      <span class="shop__price">${owned ? "Куплено" : "🌶️ " + u.price}</span>`;
     if (!owned) btn.onclick = () => buyUpgrade(u.id);
     eg.appendChild(btn);
   });
@@ -830,7 +862,7 @@ function renderShop() {
   // Горшки
   const pg = document.createElement("section");
   pg.className = "shop__group";
-  pg.innerHTML = "<h4>💠 Био-камеры</h4>";
+  pg.innerHTML = "<h4>Горшки</h4>";
   POTS.forEach(slot => {
     const owned = state.potsOwned[slot.id];
     const locked = state.level < slot.minLevel;
@@ -839,7 +871,7 @@ function renderShop() {
     btn.innerHTML = `
       <span class="shop__name">${slot.name} ${owned ? "✓" : locked ? "🔒" : ""}</span>
       <span class="shop__desc">${owned ? "Разблокирован" : locked ? "Требуется ур." + slot.minLevel : "Новый слот"}</span>
-      <span class="shop__price">${owned ? "—" : "$" + slot.price}</span>`;
+      <span class="shop__price">${owned ? "—" : "🌶️ " + slot.price}</span>`;
     if (!owned && !locked) btn.onclick = () => buyPot(slot.id);
     pg.appendChild(btn);
   });
@@ -855,12 +887,12 @@ function renderStats() {
   const s = state.stats;
   body.innerHTML = `
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-card__label">Извлечений</div><div class="stat-card__value">${s.harvests}</div></div>
-      <div class="stat-card"><div class="stat-card__label">Всего заработано</div><div class="stat-card__value">$${s.totalEarned}</div></div>
+      <div class="stat-card"><div class="stat-card__label">Урожаев</div><div class="stat-card__value">${s.harvests}</div></div>
+      <div class="stat-card"><div class="stat-card__label">Всего заработано</div><div class="stat-card__value">🌶️${s.totalEarned}</div></div>
       <div class="stat-card"><div class="stat-card__label">Max streak</div><div class="stat-card__value">🔥${s.maxStreak}</div></div>
       <div class="stat-card"><div class="stat-card__label">Лучший результат</div><div class="stat-card__value">${s.bestHealth}%</div></div>
       <div class="stat-card"><div class="stat-card__label">Идеальных</div><div class="stat-card__value">${s.perfectCount}</div></div>
-      <div class="stat-card"><div class="stat-card__label">Утрат</div><div class="stat-card__value">💀${s.deaths}</div></div>
+      <div class="stat-card"><div class="stat-card__label">Потерь</div><div class="stat-card__value">💀${s.deaths}</div></div>
     </div>
     <div class="achievements">
       <h4>🏅 Достижения</h4>
