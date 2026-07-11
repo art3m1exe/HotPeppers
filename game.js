@@ -18,14 +18,14 @@ const CONFIG = {
   eventMaxMs: 120000,
   eventChance: 0.18,
   rates: {
-    waterDecay: 0.0028,
-    foodDecay: 0.0022,
-    lightOnGain: 0.0014,
-    lightOffLoss: 0.0014,
-    growth: 0.056,
-    growthBad: 0.0093,
-    healthGood: 0.02,
-    healthBad: 0.005,
+    waterDecay: 0.0015,
+    foodDecay: 0.0012,
+    lightOnGain: 0.0009,
+    lightOffLoss: 0.0009,
+    growth: 0.038,
+    growthBad: 0.006,
+    healthGood: 0.025,
+    healthBad: 0.0025,
   },
   offlineMaxSec: 12 * 3600,
   action: { water: 28, feed: 22, overfillPenalty: 10 },
@@ -152,7 +152,7 @@ function applyOffline() {
       p.food = clamp(p.food - r.foodDecay * fMul * stepSec);
       const lDelta = p.lightOn ? r.lightOnGain : -r.lightOffLoss;
       p.light = clamp(p.light + lDelta * stepSec);
-      const anyBad = p.water < 18 || p.food < 18 || p.light < 18 || p.water > 92 || p.food > 92 || p.light > 92;
+      const anyBad = p.water < 12 || p.food < 12 || p.light < 12 || p.water > 96 || p.food > 96 || p.light > 96;
       if (anyBad) p.health = clamp(p.health - r.healthBad * stepSec);
       else {
         const inZone = (v) => v >= z.min && v <= z.max;
@@ -259,7 +259,7 @@ function tickPlant(p, idx) {
   const z = zoneFor(p.strainId);
   p.ageSec++;
   // Мягкий старт: первые 30 мин decay ×0.5
-  const soft = strainById(p.strainId).starterDecay && p.ageSec < 1800 ? 0.5 : 1;
+  const soft = p.ageSec < 1800 ? 0.5 : 1;
 
   // Event-модификаторы decay
   let wMul = 1, fMul = 1, lightAuto = 0;
@@ -304,7 +304,7 @@ function tickPlant(p, idx) {
   p.growth = clamp(p.growth + gRate * streakMul, 0, 100);
   state.stats.maxStreak = Math.max(state.stats.maxStreak, p.streak);
 
-  const anyBad = p.water < 18 || p.food < 18 || p.light < 18 || p.water > 92 || p.food > 92 || p.light > 92;
+  const anyBad = p.water < 12 || p.food < 12 || p.light < 12 || p.water > 96 || p.food > 96 || p.light > 96;
   if (anyBad) {
     p.health = clamp(p.health - CONFIG.rates.healthBad);
     if (p.health < 12) _survivors.add(idx); // кандидат на достижение survivor
