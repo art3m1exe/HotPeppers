@@ -373,11 +373,28 @@ button{font-family:inherit;color:inherit;}
 .plant__svg .pepper{transform-box:fill-box;transform-origin:top center;animation:pepperSway 3.4s ease-in-out infinite;will-change:transform;}
 .plant__svg .pepper--B{animation-delay:-1.1s;}
 .plant__svg .pepper--C{animation-delay:-2.2s;animation-duration:2.9s;}
-@keyframes pepperSway{0%,100%{transform:rotate(-2.2deg);}50%{transform:rotate(2.2deg);}}
+@keyframes pepperSway{0%,100%{transform:rotate(-2.2deg) scale(var(--sx,1), var(--sy,1));}50%{transform:rotate(2.2deg) scale(var(--sx,1), var(--sy,1));}}
 
 .plant--s1 .plant__leaves{opacity:1;transform:translateX(-50%) scale(.35);}
 .plant--s2 .plant__leaves{opacity:1;transform:translateX(-50%) scale(.7);}
 .plant--s3 .plant__leaves{opacity:1;transform:translateX(-50%) scale(1);}
+
+/* === Сортовые палитры + форма === */
+/* Халапеньо: классический зелёный→алый */
+.plant.strain--star1{--c1:#7ee36b;--c2:#b8e03b;--c3:#ffd84a;--c4:#ff9e1a;--c5:#ff5a1f;--c6:#ff3b30;--c7:#c81e16;--sh1:#7a0e08;--sh2:#4a0805;--g1:#ffd84a;--g2:#ff8c00;--g3:#ff3b30;--sx:1;--sy:1;}
+/* Серрано: жёлто-зелёный→оранжевый, чуть короче */
+.plant.strain--aurora{--c1:#a5e84a;--c2:#d4e03b;--c3:#ffe24a;--c4:#ffb547;--c5:#ff8c2a;--c6:#ff6b1f;--c7:#d44818;--sh1:#6b3008;--sh2:#3c2405;--g1:#ffe24a;--g2:#ffb547;--g3:#ff6b1f;--sx:1;--sy:.92;}
+/* Кайен: ярко-красный, длинный тонкий */
+.plant.strain--cryo{--c1:#5fb86b;--c2:#9bc23a;--c3:#e0c84a;--c4:#ff8a3a;--c5:#ff3b22;--c6:#d61c0e;--c7:#8a0e06;--sh1:#5a0808;--sh2:#2e0404;--g1:#ff9a3a;--g2:#ff3b22;--g3:#d61c0e;--sx:.72;--sy:1.3;}
+/* Хабанеро: оранжевый пузатый фонарик */
+.plant.strain--pulsar{--c1:#7ee36b;--c2:#d4e03b;--c3:#ffd24a;--c4:#ff8c0a;--c5:#ff5a08;--c6:#ff4008;--c7:#c82a04;--sh1:#5a2a08;--sh2:#3a1804;--g1:#ffd24a;--g2:#ff8c0a;--g3:#ff4008;--sx:1.22;--sy:.88;}
+/* Призрачный перец: бордово-красный с фиолетовым свечением */
+.plant.strain--orion{--c1:#3e7a4a;--c2:#7a8a3a;--c3:#b07a3a;--c4:#a8221a;--c5:#8a0e1a;--c6:#6a0818;--c7:#3e040e;--sh1:#2a0410;--sh2:#160308;--g1:#c84ad8;--g2:#8a1a8a;--g3:#4a0a4a;--sx:1.05;--sy:1.05;}
+/* Каролина Рипер: тёмно-красный, морщинистый, вытянутый */
+.plant.strain--quasar{--c1:#2a6a3a;--c2:#5a7a2a;--c3:#a8341a;--c4:#d61c0e;--c5:#a8080e;--c6:#7a0408;--c7:#4a0206;--sh1:#2a0206;--sh2:#160104;--g1:#ff5a3a;--g2:#d61c0e;--g3:#6a0408;--sx:.95;--sy:1.15;}
+
+/* Применение сортового масштаба к каждому перцу (поверх keyframes) */
+.plant__svg .pepper{--peSX:var(--sx,1);--peSY:var(--sy,1);}
 
 /* Body-language */
 .plant--happy{animation:happyBob 2.4s ease-in-out infinite;}

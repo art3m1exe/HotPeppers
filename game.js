@@ -658,6 +658,9 @@ function renderPlant() {
     const s = strainById(p.strainId);
     strainName.textContent = s.name;
     strainBadge.textContent = s.tier;
+    // Сортовой класс на .plant для смены палитры/формы
+    plantEl.classList.forEach((c) => { if (c.startsWith("strain--")) plantEl.classList.remove(c); });
+    plantEl.classList.add("strain--" + p.strainId);
     lastStrainId = p.strainId;
   }
   // Lamp
