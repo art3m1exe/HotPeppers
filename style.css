@@ -32,6 +32,7 @@ body{
   font-family:var(--font-body);
   color:var(--text);
   min-height:100vh;
+  min-height:100dvh;
   display:flex;justify-content:center;
   overflow:hidden;
   touch-action:none;
@@ -45,6 +46,7 @@ button{font-family:inherit;color:inherit;}
   position:relative;
   width:100%;max-width:400px;
   min-height:100vh;
+  min-height:100dvh;
   background:linear-gradient(180deg, #0c0c0f 0%, #0a0a0c 50%, #0a0a0c 100%);
   border-left:1px solid rgba(255,255,255,.06);
   border-right:1px solid rgba(255,255,255,.06);
@@ -56,7 +58,7 @@ button{font-family:inherit;color:inherit;}
 /* ============================ HUD ============================ */
 .hud{
   display:flex;align-items:center;justify-content:space-between;gap:8px;
-  padding:12px 14px;
+  padding:10px 14px;
   background:var(--bg-panel);
   border-bottom:var(--line);
 }
@@ -119,9 +121,10 @@ button{font-family:inherit;color:inherit;}
 
 /* ============================ STAGE ============================ */
 .stage{
-  display:flex;flex-direction:column;gap:8px;
-  padding:12px 14px 16px;
+  display:flex;flex-direction:column;gap:7px;
+  padding:10px 14px 12px;
   flex:1;
+  min-height:0;
 }
 
 /* ============================ POTS ============================ */
@@ -204,7 +207,8 @@ button{font-family:inherit;color:inherit;}
 /* ============================ GROWBOX / ARENA ============================ */
 .growbox{
   position:relative;order:4;
-  width:100%;min-height:240px;
+  width:100%;min-height:160px;
+  flex:1 1 160px;
   border:var(--line);border-radius:var(--radius-lg);overflow:hidden;
   background:linear-gradient(180deg, #141416 0%, #0e0e11 100%);
   box-shadow:var(--shadow-soft);
@@ -348,8 +352,8 @@ button{font-family:inherit;color:inherit;}
 @keyframes moodBob{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
 
 /* ============================ PLANT ============================ */
-.plant{position:relative;z-index:2;width:180px;height:210px;display:flex;align-items:flex-end;justify-content:center;will-change:transform;cursor:pointer;}
-.plant__leaves{position:absolute;bottom:0;left:50%;transform:translateX(-50%) scale(0);width:180px;height:180px;transition:transform 1.2s var(--ease), opacity .8s var(--ease);opacity:0;display:grid;place-items:end center;will-change:transform,opacity;}
+.plant{position:relative;z-index:2;width:170px;height:200px;max-height:100%;display:flex;align-items:flex-end;justify-content:center;will-change:transform;cursor:pointer;transform-origin:bottom center;}
+.plant__leaves{position:absolute;bottom:0;left:50%;transform:translateX(-50%) scale(0);width:170px;height:170px;transition:transform 1.2s var(--ease), opacity .8s var(--ease);opacity:0;display:grid;place-items:end center;will-change:transform,opacity;transform-origin:bottom center;}
 .plant__svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 6px 18px rgba(0,0,0,.55));}
 
 /* Фоновая огненная аура растения — пульсация */
@@ -387,7 +391,7 @@ button{font-family:inherit;color:inherit;}
 .plant--tapped{animation:squash .18s ease-out;}
 @keyframes squash{0%{transform:scale(1);}50%{transform:scale(1.12,.88);}100%{transform:scale(1);}}
 
-.pot-dish{position:relative;z-index:2;width:180px;height:26px;margin-top:-4px;background:linear-gradient(180deg, #2a2a30 0%, #16161a 100%);border:1px solid rgba(255,255,255,.06);border-radius:0 0 22px 22px / 0 0 20px 20px;box-shadow:0 8px 18px rgba(0,0,0,.45);}
+.pot-dish{position:relative;z-index:2;width:170px;height:24px;margin-top:-4px;background:linear-gradient(180deg, #2a2a30 0%, #16161a 100%);border:1px solid rgba(255,255,255,.06);border-radius:0 0 22px 22px / 0 0 20px 20px;box-shadow:0 8px 18px rgba(0,0,0,.45);}
 
 /* FX particles */
 .fx{position:absolute;inset:0;pointer-events:none;z-index:6;}
@@ -445,7 +449,7 @@ button{font-family:inherit;color:inherit;}
 /* ============================ METERS ============================ */
 .panel{order:6;padding:0;}
 .panel__title{display:none;}
-.meters{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.meters{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .meter__head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:4px;}
 .meter__name{font-weight:600;font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em;}
 .meter__value{font-weight:600;font-size:12px;font-variant-numeric:tabular-nums;color:var(--text);}
@@ -585,12 +589,35 @@ button{font-family:inherit;color:inherit;}
 }
 @media (min-width:421px){
   body{padding:20px 0;align-items:flex-start;}
-  .phone{border-radius:32px;border:8px solid #0a0a0c;min-height:calc(100vh - 40px);box-shadow:0 0 60px rgba(255,59,48,.10), 0 10px 40px rgba(0,0,0,.6);}
+  .phone{border-radius:32px;border:8px solid #0a0a0c;min-height:calc(100vh - 40px);min-height:calc(100dvh - 40px);box-shadow:0 0 60px rgba(255,59,48,.10), 0 10px 40px rgba(0,0,0,.6);}
   .toasts{max-width:400px;}
 }
 @media (max-height:760px){
   .hint{display:none;}
+  .growbox{flex:1 1 140px;min-height:140px;}
+  .plant{transform:scale(.9);}
+  .strain-info__name{font-size:16px;}
+  .grow-actions{gap:7px;}
+  .btn{padding:11px 14px;}
+  .meters{gap:7px;}
 }
 @media (max-height:640px){
-  .phone{overflow-y:auto;min-height:0;}
+  .plant{transform:scale(.72);}
+  .growbox{flex:1 1 110px;min-height:110px;}
+  .pot{padding:6px 5px;}
+  .grow-actions{gap:6px;}
+  .btn{padding:10px 14px;}
+  .meters{gap:5px;}
+  .meter__bar{height:5px;}
+  .strain-info__name{font-size:15px;}
+  .growth-progress__bar{height:8px;}
+  .stage{padding:8px 14px 10px;gap:6px;}
+}
+@media (max-height:560px){
+  .plant{transform:scale(.68);}
+  .growbox{flex:1 1 100px;min-height:100px;}
+  .hud{padding:8px 12px;}
+  .hud__actions{gap:5px;}
+  .btn-icon{width:32px;height:32px;font-size:14px;}
+  .stat{padding:6px 10px;font-size:11px;}
 }
