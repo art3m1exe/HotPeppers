@@ -221,7 +221,54 @@
         </svg>
       </div>
     </div>
-    <div class="pot-dish"></div>
+<div class="pot-dish">
+      <svg class="pot-dish__svg" viewBox="0 0 240 175" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="potBody" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#e08858"/>
+            <stop offset="0.3" stop-color="#c2683a"/>
+            <stop offset="0.65" stop-color="#9a4a26"/>
+            <stop offset="1" stop-color="#6e3318"/>
+          </linearGradient>
+          <linearGradient id="potRim" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e8925e"/>
+            <stop offset="0.5" stop-color="#b85a30"/>
+            <stop offset="1" stop-color="#7a3818"/>
+          </linearGradient>
+          <linearGradient id="potInner" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1a0c04"/>
+            <stop offset="1" stop-color="#3a2410"/>
+          </linearGradient>
+          <linearGradient id="potSoil" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#4a2e12"/>
+            <stop offset="1" stop-color="#281808"/>
+          </linearGradient>
+        </defs>
+        <!-- Тело горшка: конус сужающийся книзу (выше) -->
+        <path d="M38 32 L202 32 L170 168 L70 168 Z" fill="url(#potBody)" stroke="#5a2810" stroke-width="1.5" stroke-linejoin="round"/>
+        <!-- Тень/объём на теле горшка (правая сторона) -->
+        <path d="M150 34 L170 168 L140 168 L122 34 Z" fill="rgba(60,28,10,.25)"/>
+        <!-- Блик на левой стороне -->
+        <path d="M52 34 L38 34 L70 168 L82 168 Z" fill="rgba(255,210,170,.08)"/>
+        <!-- Ободок: выступающий воротник наверху -->
+        <path d="M28 14 L212 14 L214 34 L26 34 Z" fill="url(#potRim)" stroke="#5a2810" stroke-width="1.5" stroke-linejoin="round"/>
+        <!-- Блик на ободке сверху -->
+        <path d="M30 16 L210 16 L210 19 L30 19 Z" fill="rgba(255,210,170,.35)"/>
+        <!-- Внутренняя тёмная полость (отверстие горшка) -->
+        <ellipse cx="120" cy="34" rx="92" ry="9" fill="url(#potInner)" stroke="#3a1c08" stroke-width="1"/>
+        <!-- Земля внутри -->
+        <ellipse cx="120" cy="36" rx="86" ry="7" fill="url(#potSoil)"/>
+        <!-- Текстура земли: точки -->
+        <circle cx="80" cy="35" r="1.5" fill="rgba(0,0,0,.5)"/>
+        <circle cx="105" cy="37" r="1.2" fill="rgba(90,58,24,.6)"/>
+        <circle cx="140" cy="34" r="1.4" fill="rgba(0,0,0,.45)"/>
+        <circle cx="165" cy="37" r="1.1" fill="rgba(100,64,28,.5)"/>
+        <circle cx="155" cy="33" r="1" fill="rgba(0,0,0,.4)"/>
+        <circle cx="95" cy="38" r="1" fill="rgba(0,0,0,.4)"/>
+        <!-- Нижний край (основание) -->
+        <ellipse cx="120" cy="168" rx="50" ry="4" fill="#5a2810"/>
+      </svg>
+    </div>
 
     <div class="fx" id="fx"></div>
     <div class="dmg-layer" id="dmgLayer" aria-hidden="true"></div>
