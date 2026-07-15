@@ -412,6 +412,7 @@ button{font-family:inherit;color:inherit;}
   position:relative;z-index:4;
   width:218px;height:110px;margin-top:-48px;
   pointer-events:none;
+  transform-origin:top center;
   filter:drop-shadow(0 10px 18px rgba(0,0,0,.6));
 }
 .pot-dish__svg{
