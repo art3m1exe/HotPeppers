@@ -410,7 +410,8 @@ button{font-family:inherit;color:inherit;}
 /* ===== Цветочный горшок (SVG): терракотовый конус с ободком ===== */
 .pot-dish{
   position:relative;z-index:4;
-  width:218px;height:110px;margin-top:-48px;
+  width:clamp(170px, 27vh, 218px);height:clamp(86px, 13.5vh, 110px);
+  margin-top:clamp(-36px, -5.5vh, -48px);
   pointer-events:none;
   transform-origin:top center;
   filter:drop-shadow(0 10px 18px rgba(0,0,0,.6));
@@ -622,7 +623,6 @@ button{font-family:inherit;color:inherit;}
   .hint{display:none;}
   .growbox{flex:1 1 140px;min-height:140px;}
   .plant{transform:scale(.9);}
-  .pot-dish{transform:scale(.9);}
   .strain-info__name{font-size:16px;}
   .grow-actions{gap:7px;}
   .btn{padding:11px 14px;}
@@ -630,7 +630,6 @@ button{font-family:inherit;color:inherit;}
 }
 @media (max-height:640px){
   .plant{transform:scale(.72);}
-  .pot-dish{transform:scale(.72);}
   .growbox{flex:1 1 110px;min-height:110px;}
   .pot{padding:6px 5px;}
   .grow-actions{gap:6px;}
@@ -643,7 +642,6 @@ button{font-family:inherit;color:inherit;}
 }
 @media (max-height:560px){
   .plant{transform:scale(.68);}
-  .pot-dish{transform:scale(.68);}
   .growbox{flex:1 1 100px;min-height:100px;}
   .hud{padding:8px 12px;}
   .hud__actions{gap:5px;}
